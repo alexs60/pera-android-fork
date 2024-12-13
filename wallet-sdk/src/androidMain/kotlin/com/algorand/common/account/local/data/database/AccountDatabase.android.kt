@@ -19,9 +19,7 @@ import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.Dispatchers
 
 internal fun getAccountDatabase(ctx: Context): AccountDatabase {
-    return getDatabaseBuilder(ctx)
-        .setDriver(BundledSQLiteDriver())
-        .build()
+    return getDatabaseBuilder(ctx).build()
 }
 
 internal fun getDatabaseBuilder(ctx: Context): RoomDatabase.Builder<AccountDatabase> {
@@ -31,4 +29,5 @@ internal fun getDatabaseBuilder(ctx: Context): RoomDatabase.Builder<AccountDatab
         context = appContext,
         name = dbFile.absolutePath
     ).setQueryCoroutineContext(Dispatchers.IO)
+        .setDriver(BundledSQLiteDriver())
 }

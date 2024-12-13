@@ -21,16 +21,14 @@ import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
 
 internal fun getAccountDatabase(): AccountDatabase {
-    return createAccountDatabase()
-        .setDriver(BundledSQLiteDriver())
-        .build()
+    return createAccountDatabase().build()
 }
 
 internal fun createAccountDatabase(): RoomDatabase.Builder<AccountDatabase> {
     val dbFilePath = documentDirectory() + "/${AccountDatabase.DATABASE_NAME}.db"
     return Room.databaseBuilder<AccountDatabase>(
         name = dbFilePath,
-    )
+    ).setDriver(BundledSQLiteDriver())
 }
 
 @OptIn(ExperimentalForeignApi::class)
