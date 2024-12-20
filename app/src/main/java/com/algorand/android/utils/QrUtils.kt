@@ -18,8 +18,6 @@ import com.algorand.android.BuildConfig
 import com.algorand.android.R
 import com.algorand.android.models.DecodedQrCode
 import com.algorand.android.utils.walletconnect.WALLET_CONNECT_URL_PREFIX
-import com.google.zxing.BarcodeFormat
-import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.math.BigInteger
 
 private const val MNEMONIC_KEY = "mnemonic"
@@ -39,7 +37,11 @@ private const val QUERY_INDEX = 1
 fun getQrCodeBitmap(size: Int, qrContent: String): Bitmap? {
     return try {
         // The QR code has self padding about 28dp.
-        BarcodeEncoder().encodeBitmap(qrContent, BarcodeFormat.QR_CODE, size, size)
+        // TODO still need to generate a bitmap of a qrcode or change the current UI to be compose ready
+//        val qrPainter = QrPainter(qrContent, QrKitOptions())
+//        BitmapPainter(qrPainter.)
+//        BarcodeEncoder().encodeBitmap(qrContent, BarcodeFormat.QR_CODE, size, size)
+        null
     } catch (e: Exception) {
         null
     }

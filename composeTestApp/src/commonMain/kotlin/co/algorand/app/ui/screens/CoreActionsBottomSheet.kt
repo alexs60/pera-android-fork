@@ -58,7 +58,7 @@ fun CoreActionsBottomSheet(
         ModalBottomSheet(
             onDismissRequest = { isVisible.value = false },
             sheetState = sheetState,
-            windowInsets = WindowInsets(bottom = paddingValues.calculateBottomPadding()),
+            contentWindowInsets = { WindowInsets(bottom = paddingValues.calculateBottomPadding()) },
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()

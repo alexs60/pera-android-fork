@@ -17,7 +17,7 @@ import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.algorand.common.qr.presentation.view.QrScanner
+import com.algorand.common.qr.presentation.view.PeraQrScanner
 import com.algorand.common.qr.presentation.view.QrScannerViewEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -41,7 +41,7 @@ class QrScannerView(context: Context, attrs: AttributeSet? = null) : AbstractCom
 
     @Composable
     override fun Content() {
-        QrScanner(
+        PeraQrScanner(
             viewEvent = qrScannerViewEventFlow.collectAsStateWithLifecycle(),
             onQrScanned = onQrScanned
         )

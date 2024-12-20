@@ -237,8 +237,7 @@ dependencies {
 
     implementation libs.biometric
 
-    implementation libs.zxing.android.embedded
-
+    implementation(libs.qr.chaintech)
     implementation libs.room.runtime
     implementation libs.room.ktx
     ksp libs.room.compiler

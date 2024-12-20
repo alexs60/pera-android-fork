@@ -30,7 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.algorand.common.qr.presentation.view.QrScanner
+import com.algorand.common.qr.presentation.view.PeraQrScanner
 import com.algorand.common.qr.presentation.view.QrScannerViewEvent
 import com.algorand.common.ui.theme.PeraTheme
 import kotlinx.coroutines.launch
@@ -66,7 +66,7 @@ fun QrScannerScreen() {
                 )
         },
     ) {
-        QrScanner(
+        PeraQrScanner(
             viewEvent = cameraState
         ) {
             scannedQr = it

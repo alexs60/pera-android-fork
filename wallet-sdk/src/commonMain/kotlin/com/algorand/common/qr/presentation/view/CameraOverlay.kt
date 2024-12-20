@@ -12,10 +12,7 @@
 
 package com.algorand.common.qr.presentation.view
 
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -24,6 +21,7 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
@@ -36,12 +34,7 @@ import com.algorand.common.qr.presentation.view.CornerStrokePosition.TopRight
 private val TRANSPARENT_AREA_SIZE = 250.dp
 
 @Composable
-internal fun CameraOverlay(
-    modifier: Modifier = Modifier,
-) {
-    Canvas(
-        modifier = modifier.fillMaxSize()
-    ) {
+fun cameraOverlay(): ContentDrawScope.() -> Unit = {
         drawIntoCanvas { it.saveLayer(Rect(Offset.Zero, size), Paint()) }
         drawRect(
             color = Color.Black.copy(alpha = 0.64f),
@@ -58,12 +51,10 @@ internal fun CameraOverlay(
             size = Size(TRANSPARENT_AREA_SIZE.toPx(), TRANSPARENT_AREA_SIZE.toPx()),
             topLeft = transparentAreaOffset
         )
-
         drawCornerStroke(transparentAreaOffset, TopLeft)
         drawCornerStroke(transparentAreaOffset, TopRight)
         drawCornerStroke(transparentAreaOffset, BottomLeft)
         drawCornerStroke(transparentAreaOffset, BottomRight)
-    }
 }
 
 private fun DrawScope.drawCornerStroke(offset: Offset, position: CornerStrokePosition) {
