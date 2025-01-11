@@ -690,7 +690,7 @@ class MainActivity :
     }
 
     private fun setupCoreActionsTabBarView() {
-        coreActionsTabBarViewModel.initViewState()
+        coreActionsTabBarViewModel.changeViewStateForFeatureFlag()
         binding.coreActionsTabBarView.setListener(object : CoreActionsTabBarView.Listener {
             override fun onSendClick() {
                 firebaseAnalytics.logTapSend()
@@ -753,6 +753,7 @@ class MainActivity :
     private fun onNewNodeActivated() {
         hideProgress()
         mainViewModel.onNewNodeActivated()
+        coreActionsTabBarViewModel.changeViewStateForFeatureFlag()
     }
 
     private fun onNewNodeLoading() {
