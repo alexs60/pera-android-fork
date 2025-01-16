@@ -10,24 +10,11 @@
  * limitations under the License
  */
 
-package com.algorand.common.account.local.domain.repository
+package com.algorand.common.account.local.domain.model
 
-import com.algorand.common.account.local.domain.model.LocalAccount
-import kotlinx.coroutines.flow.Flow
-
-internal interface Bip39AccountRepository {
-
-    fun getAllAsFlow(): Flow<List<LocalAccount.Bip39>>
-
-    fun getAccountCountAsFlow(): Flow<Int>
-
-    suspend fun getAll(): List<LocalAccount.Bip39>
-
-    suspend fun getAccount(address: String): LocalAccount.Bip39?
-
-    suspend fun addAccount(account: LocalAccount.Bip39)
-
-    suspend fun deleteAccount(address: String)
-
-    suspend fun deleteAllAccounts()
-}
+data class HdSeed(
+    val seedId: Int,
+    val encryptedSeed: ByteArray,
+    val encryptedMnemonicEntropy: String,
+    val seedCustomName: String,
+)

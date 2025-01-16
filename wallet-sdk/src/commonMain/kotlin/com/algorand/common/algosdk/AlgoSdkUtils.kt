@@ -13,3 +13,8 @@
 package com.algorand.common.algosdk
 
 expect fun isValidAccountAddress(address: String): Boolean
+
+enum class Bip32DerivationType(val value: Int) {
+    Peikert(9),
+    Khovratovich(32)
+}

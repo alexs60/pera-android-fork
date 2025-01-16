@@ -10,9 +10,11 @@
  * limitations under the License
  */
 
-package com.algorand.common.encryption
+package com.algorand.common.account.local.data.mapper.model
 
-interface AddressEncryptionManager {
-    fun encrypt(address: String): String
-    fun decrypt(encryptedAddress: String): String
+import com.algorand.common.account.local.data.database.model.HdKeyEntity
+import com.algorand.common.account.local.domain.model.LocalAccount
+
+internal interface HdKeyMapper {
+    operator fun invoke(entity: HdKeyEntity): LocalAccount.HdKey
 }

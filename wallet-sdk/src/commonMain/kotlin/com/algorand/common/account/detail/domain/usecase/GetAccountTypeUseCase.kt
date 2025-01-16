@@ -26,7 +26,7 @@ internal class GetAccountTypeUseCase(
     override suspend fun invoke(address: String): AccountType? {
         val localAccounts = getLocalAccounts()
         val cachedAccount = getAccountInformation(address) ?: return null
-        val account = localAccounts.firstOrNull { it.address == address } ?: return null
+        val account = localAccounts.firstOrNull { it.algoAddress == address } ?: return null
         return if (cachedAccount.rekeyAdminAddress != null) {
             getAccountTypeForRekeyedAccount(account, localAccounts, cachedAccount)
         } else {
@@ -39,7 +39,7 @@ internal class GetAccountTypeUseCase(
         localAccounts: List<LocalAccount>,
         cachedAccount: AccountInformation
     ): AccountType {
-        val doWeHaveSigner = localAccounts.any { it.address == cachedAccount.rekeyAdminAddress }
+        val doWeHaveSigner = localAccounts.any { it.algoAddress == cachedAccount.rekeyAdminAddress }
         return when {
             doWeHaveSigner -> AccountType.RekeyedAuth
             account is LocalAccount.NoAuth -> AccountType.NoAuth
@@ -52,7 +52,7 @@ internal class GetAccountTypeUseCase(
             is LocalAccount.Algo25 -> AccountType.Algo25
             is LocalAccount.LedgerBle -> AccountType.LedgerBle
             is LocalAccount.NoAuth -> AccountType.NoAuth
-            is LocalAccount.Bip39 -> AccountType.Bip39
+            is LocalAccount.HdKey -> AccountType.HdKey
         }
     }
 }

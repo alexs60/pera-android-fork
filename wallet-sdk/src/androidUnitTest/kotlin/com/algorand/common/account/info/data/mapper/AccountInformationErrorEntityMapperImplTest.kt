@@ -13,29 +13,25 @@
 package com.algorand.common.account.info.data.mapper
 
 import com.algorand.common.account.info.data.database.model.AccountInformationEntity
-import com.algorand.common.encryption.AddressEncryptionManager
 import io.mockk.every
 import io.mockk.mockk
-import kotlin.test.assertEquals
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class AccountInformationErrorEntityMapperImplTest {
 
-    private val addressEncryptionManager = mockk<AddressEncryptionManager> {
-        every { encrypt(ADDRESS) } returns ENCRYPTED_ADDRESS
-    }
-    private val sut = AccountInformationErrorEntityMapperImpl(addressEncryptionManager)
+    private val sut = AccountInformationErrorEntityMapperImpl()
 
     @Test
     fun `EXPECT entity with default values`() {
         val result = sut(ADDRESS)
 
         val expected = AccountInformationEntity(
-            encryptedAddress = ENCRYPTED_ADDRESS,
+            algoAddress = ADDRESS,
             algoAmount = "0",
             optedInAppsCount = 0,
             appsTotalExtraPages = 0,
-            authAddress = null,
+            authAlgoAddress = null,
             createdAtRound = null,
             lastFetchedRound = 0,
             totalCreatedAppsCount = 0,
@@ -48,6 +44,5 @@ class AccountInformationErrorEntityMapperImplTest {
 
     private companion object {
         private const val ADDRESS = "ADDRESS"
-        private const val ENCRYPTED_ADDRESS = "ENCRYPTED_ADDRESS"
     }
 }

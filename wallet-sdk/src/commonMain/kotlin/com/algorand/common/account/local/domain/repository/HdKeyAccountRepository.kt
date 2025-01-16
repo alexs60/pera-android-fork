@@ -10,16 +10,24 @@
  * limitations under the License
  */
 
-package com.algorand.common.encryption
+package com.algorand.common.account.local.domain.repository
 
-internal class AddressEncryptionManagerImpl : AddressEncryptionManager {
-    override fun encrypt(address: String): String {
-        // TODO Will be implemented at the end of the account refactor
-        return address
-    }
+import com.algorand.common.account.local.domain.model.LocalAccount
+import kotlinx.coroutines.flow.Flow
 
-    override fun decrypt(encryptedAddress: String): String {
-        // TODO Will be implemented at the end of the account refactor
-        return encryptedAddress
-    }
+internal interface HdKeyAccountRepository {
+
+    fun getAllAsFlow(): Flow<List<LocalAccount.HdKey>>
+
+    fun getAccountCountAsFlow(): Flow<Int>
+
+    suspend fun getAll(): List<LocalAccount.HdKey>
+
+    suspend fun getAccount(address: String): LocalAccount.HdKey?
+
+    suspend fun addAccount(account: LocalAccount.HdKey)
+
+    suspend fun deleteAccount(address: String)
+
+    suspend fun deleteAllAccounts()
 }

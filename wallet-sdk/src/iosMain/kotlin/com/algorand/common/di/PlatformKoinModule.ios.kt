@@ -12,17 +12,20 @@
 
 package com.algorand.common.di
 
-import com.algorand.common.account.local.data.database.AccountDatabase
-import com.algorand.common.account.local.data.database.getAccountDatabase
+import com.algorand.common.account.local.data.database.AddressDatabase
+import com.algorand.common.account.local.data.database.getAddressDatabase
 import com.algorand.common.algosdk.AlgoAccountSdk
 import com.algorand.common.algosdk.AlgoAccountSdkImpl
+import com.algorand.common.encryption.AESPlatformManager
+import com.algorand.common.encryption.AESPlatformManagerImpl
 import com.algorand.common.foundation.database.PeraDatabase
 import com.algorand.common.foundation.database.getPeraDatabase
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 internal actual fun platformKoinModule(): Module = module {
-    single<AccountDatabase> { getAccountDatabase() }
+    single<AddressDatabase> { getAddressDatabase() }
     single<AlgoAccountSdk> { AlgoAccountSdkImpl() }
+    single<AESPlatformManager> { AESPlatformManagerImpl() }
     single<PeraDatabase> { getPeraDatabase() }
 }

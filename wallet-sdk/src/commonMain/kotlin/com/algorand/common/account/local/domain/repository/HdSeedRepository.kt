@@ -10,11 +10,24 @@
  * limitations under the License
  */
 
-package com.algorand.common.account.local.data.mapper.model
+package com.algorand.common.account.local.domain.repository
 
-import com.algorand.common.account.local.data.database.model.Bip39Entity
-import com.algorand.common.account.local.domain.model.LocalAccount
+import com.algorand.common.account.local.domain.model.HdSeed
+import kotlinx.coroutines.flow.Flow
 
-internal interface Bip39Mapper {
-    operator fun invoke(entity: Bip39Entity): LocalAccount.Bip39
+internal interface HdSeedRepository {
+
+    fun getAllAsFlow(): Flow<List<HdSeed>>
+
+    fun getHdSeedCountAsFlow(): Flow<Int>
+
+    suspend fun getAll(): List<HdSeed>
+
+    suspend fun getHdSeed(seedId: Int): HdSeed?
+
+    suspend fun addHdSeed(seed: HdSeed)
+
+    suspend fun deleteHdSeed(address: String)
+
+    suspend fun deleteAllHdSeeds()
 }

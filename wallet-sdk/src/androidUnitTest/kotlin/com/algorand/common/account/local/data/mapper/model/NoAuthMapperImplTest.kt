@@ -14,30 +14,21 @@ package com.algorand.common.account.local.data.mapper.model
 
 import com.algorand.common.account.local.data.database.model.NoAuthEntity
 import com.algorand.common.account.local.domain.model.LocalAccount
-import com.algorand.common.encryption.AddressEncryptionManager
 import com.algorand.common.testing.peraFixture
-import io.mockk.coEvery
-import io.mockk.mockk
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 internal class NoAuthMapperImplTest {
-
-    private val encryptionManager: AddressEncryptionManager = mockk()
-
-    private val sut = NoAuthMapperImpl(encryptionManager)
+    private val sut = NoAuthMapperImpl()
 
     @Test
     fun `EXPECT mapped model`() {
-        coEvery { encryptionManager.decrypt("encrypted_address") } returns "decrypted_address"
-
         val result = sut(NO_AUTH_ENTITY)
-
-        val expected = LocalAccount.NoAuth("decrypted_address")
+        val expected = LocalAccount.NoAuth("unencrypted_address")
         assertEquals(expected, result)
     }
 
     companion object {
-        private val NO_AUTH_ENTITY = peraFixture<NoAuthEntity>().copy(encryptedAddress = "encrypted_address")
+        private val NO_AUTH_ENTITY = peraFixture<NoAuthEntity>().copy(algoAddress = "unencrypted_address")
     }
 }

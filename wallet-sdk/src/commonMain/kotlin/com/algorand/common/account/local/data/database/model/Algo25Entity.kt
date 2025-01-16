@@ -19,9 +19,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "algo_25")
 internal data class Algo25Entity(
     @PrimaryKey
-    @ColumnInfo("encrypted_address")
-    val encryptedAddress: String,
+    @ColumnInfo("algo_address")
+    val algoAddress: String,
 
     @ColumnInfo("encrypted_secret_key")
-    val encryptedSecretKey: String
+    val encryptedSecretKey: ByteArray
 )

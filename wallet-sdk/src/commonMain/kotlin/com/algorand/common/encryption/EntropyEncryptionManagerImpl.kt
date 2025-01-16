@@ -10,18 +10,18 @@
  * limitations under the License
  */
 
-package com.algorand.common.account.local.data.database.model
+package com.algorand.common.encryption
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+internal class EntropyEncryptionManagerImpl(
+    private val AESPlatformManager: AESPlatformManager
+) : EntropyEncryptionManager {
+    override fun encrypt(data: String): String {
+        // TODO Will be implemented at the end of the account refactor
+        return AESPlatformManager.encryptString(data)
+    }
 
-@Entity(tableName = "bip_39")
-internal data class Bip39Entity(
-    @PrimaryKey
-    @ColumnInfo("encrypted_address")
-    val encryptedAddress: String,
-
-    @ColumnInfo("encrypted_secret_key")
-    val encryptedSecretKey: String
-)
+    override fun decrypt(encryptedData: String): String {
+        // TODO Will be implemented at the end of the account refactor
+        return AESPlatformManager.decryptString(encryptedData)
+    }
+}

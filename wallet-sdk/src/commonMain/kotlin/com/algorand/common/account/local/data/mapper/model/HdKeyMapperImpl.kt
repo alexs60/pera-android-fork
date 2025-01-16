@@ -10,11 +10,22 @@
  * limitations under the License
  */
 
-package com.algorand.common.account.local.data.mapper.entity
+package com.algorand.common.account.local.data.mapper.model
 
-import com.algorand.common.account.local.data.database.model.Bip39Entity
+import com.algorand.common.account.local.data.database.model.HdKeyEntity
 import com.algorand.common.account.local.domain.model.LocalAccount
 
-internal interface Bip39EntityMapper {
-    operator fun invoke(localAccount: LocalAccount.Bip39): Bip39Entity
+internal class HdKeyMapperImpl : HdKeyMapper {
+    override fun invoke(entity: HdKeyEntity): LocalAccount.HdKey {
+        return LocalAccount.HdKey(
+            algoAddress = entity.algoAddress,
+            publicKey = entity.publicKey,
+            encryptedPrivateKey = entity.encryptedPrivateKey,
+            seedId = entity.seedId,
+            account = entity.account,
+            change = entity.change,
+            keyIndex = entity.keyIndex,
+            derivationType = entity.derivationType
+        )
+    }
 }

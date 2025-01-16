@@ -18,12 +18,10 @@ import com.algorand.common.account.info.data.model.AccountInformationResponsePay
 import com.algorand.common.account.info.data.model.RekeyedAccountsResponse
 import com.algorand.common.account.info.domain.model.AccountInformation
 import com.algorand.common.account.info.domain.model.AssetHolding
-import com.algorand.common.encryption.AddressEncryptionManager
 
 internal class AccountInformationMapperImpl(
     private val appStateSchemeMapper: AppStateSchemeMapper,
     private val assetHoldingMapper: AssetHoldingMapper,
-    private val addressEncryptionManager: AddressEncryptionManager
 ) : AccountInformationMapper {
 
     override fun invoke(response: AccountInformationResponse): AccountInformation? {
@@ -63,10 +61,10 @@ internal class AccountInformationMapperImpl(
 
     override fun invoke(entity: AccountInformationEntity, assetHoldingList: List<AssetHolding>): AccountInformation {
         return AccountInformation(
-            address = addressEncryptionManager.decrypt(entity.encryptedAddress),
+            address = entity.algoAddress,
             amount = entity.algoAmount,
             lastFetchedRound = entity.lastFetchedRound,
-            rekeyAdminAddress = entity.authAddress,
+            rekeyAdminAddress = entity.authAlgoAddress,
             totalAppsOptedIn = entity.optedInAppsCount,
             totalAssetsOptedIn = assetHoldingList.size,
             totalCreatedApps = entity.totalCreatedAppsCount,
